@@ -17,8 +17,6 @@
         position: relative;
     }
     #player {
-        width: 50px;
-        height: 50px;
         position: absolute;
         bottom: 10px;
         left: calc(50% - 25px);
@@ -39,20 +37,30 @@
 <body>
     <h1>Pointer - HTML Game</h1>
     <p>Use left and right arrow keys to move, spacebar to shoot</p>
-    <div id="game-board">
-        <img id="player" src="https://via.placeholder.com/50" alt="Player">
-    </div>
+   <div id="game-board">
+    <img id="player" src="path_to_your_player_image.png" alt="Player">
+</div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const player = document.getElementById('player');
             const gameBoard = document.getElementById('game-board');
             let bullets = [];
+            let enemyCount = 3;
 
             function createEnemy() {
                 const enemy = document.createElement('img');
                 enemy.classList.add('enemy');
-                enemy.src = 'https://via.placeholder.com/40';
+                function createEnemy() {
+    const enemy = document.createElement('img');
+    enemy.classList.add('enemy');
+    enemy.src = "path_to_your_enemy_image.png";
+    enemy.style.left = Math.floor(Math.random() * (gameBoard.clientWidth - 40)) + 'px';
+    enemy.style.top = '0px';
+    gameBoard.appendChild(enemy);
+    moveEnemy(enemy);
+}
+
                 enemy.style.left = Math.floor(Math.random() * (gameBoard.clientWidth - 40)) + 'px';
                 enemy.style.top = '0px';
                 gameBoard.appendChild(enemy);
@@ -67,6 +75,11 @@
                     if (enemyY >= gameBoard.clientHeight) {
                         clearInterval(moveInterval);
                         gameBoard.removeChild(enemy);
+                        enemyCount--;
+                        if (enemyCount === 0) {
+                            enemyCount = 3;
+                            setTimeout(createEnemy, 2000);
+                        }
                     }
                     if (isColliding(player, enemy)) {
                         clearInterval(moveInterval);
@@ -115,7 +128,6 @@
             }
 
             function gameLoop() {
-                createEnemy();
                 moveBullets();
                 requestAnimationFrame(gameLoop);
             }
