@@ -38,7 +38,7 @@
     <h1>Pointer - HTML Game</h1>
     <p>Use left and right arrow keys to move, spacebar to shoot</p>
    <div id="game-board">
-    <img id="player" src="path_to_your_player_image.png" alt="Player">
+    <img id="Player.png" src="path_to_your_player_image.png" alt="Player">
 </div>
 
     <script>
@@ -54,7 +54,7 @@
                 function createEnemy() {
     const enemy = document.createElement('img');
     enemy.classList.add('enemy');
-    enemy.src = "path_to_your_enemy_image.png";
+    enemy.src = "Enemie.png";
     enemy.style.left = Math.floor(Math.random() * (gameBoard.clientWidth - 40)) + 'px';
     enemy.style.top = '0px';
     gameBoard.appendChild(enemy);
